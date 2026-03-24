@@ -40,18 +40,9 @@ check_not_exists() {
   fi
 }
 
-lookup_default_branch() {
-  log "Looking up default branch for $repo_path..."
-  default_branch=$(gh repo view "$repo_path" --json defaultBranchRef -q '.defaultBranchRef.name' 2>/dev/null || true)
-
-  if [ -z "$default_branch" ]; then
-    error "Could not find repo $repo_path"
-  fi
-}
-
 add_submodule() {
-  log "Adding $name ($default_branch branch) to $dest..."
-  git submodule add -b "$default_branch" "https://github.com/${repo_path}.git" "$dest"
+  log "Adding $name to $dest..."
+  git submodule add "https://github.com/${repo_path}.git" "$dest"
   git add "$dest"
   git commit -m "Add $dest submodule"
   log "Added $dest submodule."
@@ -60,5 +51,4 @@ add_submodule() {
 parse_arguments "$@"
 parse_repo_url
 check_not_exists
-lookup_default_branch
 add_submodule
