@@ -20,4 +20,4 @@ update_submodules() {
 
 pull_latest
 update_submodules
-log "All done."
+log "Done."
