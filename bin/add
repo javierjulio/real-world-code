@@ -52,7 +52,9 @@ lookup_default_branch() {
 add_submodule() {
   log "Adding $name ($default_branch branch) to $dest..."
   git submodule add -b "$default_branch" "https://github.com/${repo_path}.git" "$dest"
-  log "Added $name to $dest"
+  git add "$dest"
+  git commit -m "Add $dest submodule"
+  log "Added $dest submodule."
 }
 
 parse_arguments "$@"
