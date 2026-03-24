@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Colors
+green='\033[0;32m'
+red='\033[0;31m'
+nc='\033[0m'
+
+log() { echo -e "${green}==>${nc} ${1}"; }
+error() { echo -e "${red}Error:${nc} ${1}" >&2; exit 1; }
+
+parse_arguments() {
+  if [ -z "${1:-}" ]; then
+    echo "Usage: bin/add <github-url> [type]"
+    echo ""
+    echo "  github-url  GitHub repo URL (e.g. https://github.com/user/repo)"
+    echo "  type        'rails-apps' (default) or 'rails-engines'"
+    echo ""
+    echo "Examples:"
+    echo "  bin/add https://github.com/basecamp/fizzy"
+    echo "  bin/add https://github.com/ankane/blazer rails-engines"
+    exit 1
+  fi
+
+  url="$1"
+  type="${2:-rails-apps}"
+}
+
+parse_repo_url() {
+  repo_path=$(echo "$url" | sed 's|.*github.com/||' | sed 's|\.git$||' | sed 's|/$||')
+  name=$(basename "$repo_path")
+  category=$(basename "$type")
+  dest="$category/$name"
+}
+
+check_not_exists() {
+  if [ -d "$dest" ]; then
+    error "$dest already exists"
+  fi
+}
+
+lookup_default_branch() {
+  log "Looking up default branch for $repo_path..."
+  default_branch=$(gh repo view "$repo_path" --json defaultBranchRef -q '.defaultBranchRef.name' 2>/dev/null || true)
+
+  if [ -z "$default_branch" ]; then
+    error "Could not find repo $repo_path"
+  fi
+}
+
+add_submodule() {
+  log "Adding $name ($default_branch branch) to $dest..."
+  git submodule add -b "$default_branch" "https://github.com/${repo_path}.git" "$dest"
+  log "Added $name to $dest"
+}
+
+parse_arguments "$@"
+parse_repo_url
+check_not_exists
+lookup_default_branch
+add_submodule

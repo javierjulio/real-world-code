@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Colors
+green='\033[0;32m'
+nc='\033[0m'
+
+log() { echo -e "${green}==>${nc} ${1}"; }
+
+pull_latest() {
+  log "Pulling latest changes..."
+  git pull origin main
+}
+
+update_submodules() {
+  log "Updating all submodules to their latest versions..."
+  git submodule update --remote --jobs 8
+}
+
+pull_latest
+update_submodules
+log "All done."
