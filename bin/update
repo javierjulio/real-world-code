@@ -15,7 +15,7 @@ pull_latest() {
 
 update_submodules() {
   log "Updating all submodules to their latest versions..."
-  git submodule update --remote --jobs 8
+  git submodule update --remote --jobs 8 --depth 1
 }
 
 pull_latest

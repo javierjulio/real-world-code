@@ -42,7 +42,7 @@ check_not_exists() {
 
 add_submodule() {
   log "Adding $name to $dest..."
-  git submodule add "https://github.com/${repo_path}.git" "$dest"
+  git submodule add --depth 1 "https://github.com/${repo_path}.git" "$dest"
   git add "$dest"
   git commit -m "Add $dest submodule"
   log "Added $dest submodule."
