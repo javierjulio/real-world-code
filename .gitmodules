@@ -2,3 +2,7 @@
 	path = rails-apps/fizzy
 	url = https://github.com/basecamp/fizzy.git
 	branch = main
+[submodule "rails-apps/pagecord"]
+	path = rails-apps/pagecord
+	url = https://github.com/lylo/pagecord.git
+	branch = main
