@@ -9,3 +9,6 @@
 [submodule "rails-apps/pagecord"]
 	path = rails-apps/pagecord
 	url = https://github.com/lylo/pagecord.git
+[submodule "rails-apps/once-campfire"]
+	path = rails-apps/once-campfire
+	url = https://github.com/basecamp/once-campfire.git
