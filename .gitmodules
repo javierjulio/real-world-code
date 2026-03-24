@@ -1,0 +1,4 @@
+[submodule "rails-apps/fizzy"]
+	path = rails-apps/fizzy
+	url = https://github.com/basecamp/fizzy.git
+	branch = main
