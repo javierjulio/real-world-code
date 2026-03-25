@@ -16,3 +16,9 @@ Or clone normally and then run the update script:
 git clone https://github.com/javierjulio/real-world-code
 bin/update
 ```
+
+To view the size of each submodule:
+
+```
+git submodule foreach --quiet 'echo "$(du -sh .)" "$path"'
+```
