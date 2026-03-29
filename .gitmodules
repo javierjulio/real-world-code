@@ -15,3 +15,6 @@
 [submodule "pyxel-games/megaball"]
 	path = pyxel-games/megaball
 	url = https://github.com/kitao/megaball.git
+[submodule "pyxel-games/vortexion"]
+	path = pyxel-games/vortexion
+	url = https://github.com/kitao/vortexion.git
