@@ -12,3 +12,6 @@
 [submodule "rails-apps/once-campfire"]
 	path = rails-apps/once-campfire
 	url = https://github.com/basecamp/once-campfire.git
+[submodule "pyxel-games/megaball"]
+	path = pyxel-games/megaball
+	url = https://github.com/kitao/megaball.git
